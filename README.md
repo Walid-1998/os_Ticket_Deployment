@@ -39,9 +39,12 @@ The lab was built using:
 > Each step includes written instructions followed by a screenshot.
 Expand the See screenshots section to view the images.
 
-<h3>Step 1 — Setting Up The Virtual Machine</h3>
+<h3>Step 1 — Downloading Ubuntu Operating System & Oracle VirtualBox</h3>
 
-first of all go to https://www.virtualbox.org/ and download virtualbox that is the virtual machine we are going to use 
+https://www.virtualbox.org/ https://ubuntu.com/download/desktop
+Download The Above
+
+<h3>Step 2 — Setting Up The Virtual Machine</h3>
 
 <details><summary>See screenshots</summary>
 <img src="images/oracle virtualbox.png" width="60%" >
