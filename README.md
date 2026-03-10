@@ -45,6 +45,8 @@ https://www.virtualbox.org/ https://ubuntu.com/download/desktop
 Download The Above
 
 <h3>Step 2 — Setting Up The Virtual Machine</h3>
+Lets setup our virtual machine
+Open Oracle VirtualBox, 
 
 <details><summary>See screenshots</summary>
 <img src="images/oracle virtualbox.png" width="60%" >
