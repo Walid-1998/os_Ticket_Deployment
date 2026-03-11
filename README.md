@@ -250,6 +250,27 @@ Once submitted, the ticket is stored in the osTicket database and becomes visibl
 The ticket appears in the osTicket agent dashboard where support staff can review and manage incoming requests.
 
 <details><summary>See screenshots</summary>
-<img src="images/support center.png" width="60%" >
-<img src="images/os ticket open a new ticket 2.png" width="60%" >
+<img src="images/os ticket john tickets.png" width="60%" >
+<img src="images/os ticket john ticket from karen.png" width="60%" >
+</details>
+
+Support agents can:
+
+- View ticket details
+- Assign tickets to staff members
+- Respond to the user
+- Update ticket status
+
+### Configure Roles
+Admin Panel -> Agents -> Roles
+<details><summary>See screenshots</summary>
+<img src="images/admin panel roles.png" width="60%" >
+<img src="images/admin panel create new role.png" width="60%" >
+</details>
+
+### Configure Departments
+Admin Panel -> Agents -> Departments
+<details><summary>See screenshots</summary>
+<img src="images/admin panel roles.png" width="60%" >
+<img src="images/admin panel create new role.png" width="60%" >
 </details>
