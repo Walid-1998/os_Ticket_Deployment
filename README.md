@@ -220,12 +220,36 @@ Delete setup folder:
 ```
 sudo rm -rf /var/www/html/osticket/setup/
 ```
-🎉 Done!
 
-Admin Panel:
+## 🎫 Ticket Workflow Demonstration
 
-http://localhost/osticket/scp
+After installing osTicket, the system was tested by simulating a real support request.
 
-User Portal:
+The workflow demonstrates how a user submits a ticket and how an administrator manages and resolves it through the osTicket dashboard.
 
-http://localhost/osticket
+### User Submits a Ticket
+
+A user accesses the helpdesk portal and submits a support request.
+
+<details><summary>See screenshots</summary>
+<img src="images/support center.png" width="60%" >
+<img src="images/os ticket open a new ticket 2.png" width="60%" >
+</details>
+
+The user fills out the ticket form including:
+
+- Name
+- Email address
+- Help topic
+- Description of the issue
+
+Once submitted, the ticket is stored in the osTicket database and becomes visible to helpdesk agents.
+
+### Admin Dashboard
+
+The ticket appears in the osTicket agent dashboard where support staff can review and manage incoming requests.
+
+<details><summary>See screenshots</summary>
+<img src="images/support center.png" width="60%" >
+<img src="images/os ticket open a new ticket 2.png" width="60%" >
+</details>
