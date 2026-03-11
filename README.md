@@ -33,6 +33,13 @@ Expand the See screenshots section to view the images.
 
 > [!IMPORTANT]
 > Make Sure You Have Enable Copy and Paste in Oracle VirtualBox
+<details><summary>See screenshots</summary>
+<img src="images/copy paste 1.png" width="60%" >
+<img src="images/installing the vm.png" width="60%" >
+<img src="images/os install.png" width="60%" >
+<img src="images/vm hardware.png" width="60%" >
+<img src="images/samenvatting.png" width="60%" >
+</details>
 
 <h3>Step 1 — Downloading Ubuntu Operating System & Oracle VirtualBox</h3>
 
