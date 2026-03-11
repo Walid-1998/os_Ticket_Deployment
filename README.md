@@ -33,18 +33,25 @@ Expand the See screenshots section to view the images.
 
 > [!IMPORTANT]
 > Make Sure You Have Enable Copy and Paste in Oracle VirtualBox
+
+Settings > General > Advanced > Set Both Options To Bidirectional 
 <details><summary>See screenshots</summary>
-<img src="images/copy paste 1.png" width="60%" >
-<img src="images/installing the vm.png" width="60%" >
-<img src="images/os install.png" width="60%" >
-<img src="images/vm hardware.png" width="60%" >
-<img src="images/samenvatting.png" width="60%" >
+<img src="images/copy paste vm 1.jpg" width="60%" >
+<img src="images/copy paste vm 2.jpg" width="60%" >
+<img src="images/copy paste vm 3.jpg" width="60%" >
 </details>
 
 <h3>Step 1 — Downloading Ubuntu Operating System & Oracle VirtualBox</h3>
 
-https://www.virtualbox.org/ https://ubuntu.com/download/desktop
-Download The Above
+[Oracle VirtualBox](https://www.virtualbox.org)
+<details><summary>See screenshots</summary>
+<img src="images/image of vm download.png" width="60%" >
+</details>
+
+[Ubuntu](https://ubuntu.com/download/desktop)
+<details><summary>See screenshots</summary>
+<img src="images/image of ubuntu download.png" width="60%" >
+</details>
 
 <h3>Step 2 — Setting Up The Virtual Machine</h3>
 Lets setup our virtual machine
