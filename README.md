@@ -271,12 +271,16 @@ Admin Panel -> Agents -> Roles
 ### Configure Departments
 Admin Panel -> Agents -> Departments
 <details><summary>See screenshots</summary>
-<img src="images/admin panel roles.png" width="60%" >
-<img src="images/admin panel create new role.png" width="60%" >
+<img src="images/department 1.png" width="60%" >
+<img src="images/admin panel departments 2.png" width="60%" >
 </details>
 
 ### Configure Teams
 Admin Panel -> Agents -> Teams (Pull Agents from different Departments)
+<details><summary>See screenshots</summary>
+<img src="images/teams.png" width="60%" >
+<img src="images/admin panel teams.png" width="60%" >
+</details>
 
 Allow anyone to create tickets
 Admin Panel -> Settings -> User Settings (UNCHECK: unregistered users can create tickets)
@@ -297,6 +301,13 @@ Admin Panel -> Manage -> SLA
 - Sev-A (Grace Period: 1 hour, Schedule: 24/7)
 - Sev-B (Grace Period: 4 hours, Schedule: 24/7)
 - Sev-C (Grace Period: 8 hours, Business Hours)
+<details><summary>See screenshots</summary>
+<img src="images/admin panel sla.png" width="60%" >
+<img src="images/admin panel add SLA.png" width="60%" >
+<img src="images/Admin panel Sla Sev-A.png" width="60%" >
+<img src="images/admin panel sla sev b.png" width="60%" >
+<img src="images/admin panel sla sev c.png" width="60%" >
+</details>
 
 ### Configure Help Topics (For when users create a ticket)
 Admin Panel -> Manage -> Help Topics
@@ -305,3 +316,7 @@ Admin Panel -> Manage -> Help Topics
 - Equipment Request
 - Password Reset
 - Other
+<details><summary>See screenshots</summary>
+<img src="images/admin panel add help topics.png" width="60%" >
+<img src="images/admin panel help topics done.png" width="60%" >
+</details>
