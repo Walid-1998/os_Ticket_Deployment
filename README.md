@@ -54,8 +54,10 @@ Settings > General > Advanced > Set Both Options To Bidirectional
 </details>
 
 <h3>Step 2 — Setting Up The Virtual Machine</h3>
-Lets setup our virtual machine
-Open Oracle VirtualBox > New > Pick your vm name (can be anything) > Select your iso image (ubuntu os you downloaded) > Next >  Pick a Username & Password you gonna use to login in to ubuntu > Next > I Suggest to pick 9000 Memory, 5 Cpus, 25 or 30 gb of disk storage > Next > Summury of your vm if everything is okay press on finish
+Lets setup our virtual machine:
+
+* In this step we connect to the ubuntu virtual machine using VirtualBox.  
+This allows us to access the server environment where the osTicket system and its required components will be installed and configured.
 
 <details><summary>See screenshots</summary>
 <img src="images/oracle virtualbox.png" width="60%" >
