@@ -43,6 +43,11 @@ Settings > General > Advanced > Set Both Options To Bidirectional
 
 <h3>Step 1 — Downloading Ubuntu Operating System & Oracle VirtualBox</h3>
 
+In this step, we download the required software to create our virtual environment.
+We install Oracle VM VirtualBox, which allows us to run virtual machines on our computer, and download the Ubuntu operating system that will host the help-desk system.
+
+Ubuntu will be used as the server where the osTicket application and its dependencies will be installed.
+
 [Oracle VirtualBox](https://www.virtualbox.org)
 <details><summary>See screenshots</summary>
 <img src="images/image of vm download.png" width="60%" >
@@ -56,8 +61,10 @@ Settings > General > Advanced > Set Both Options To Bidirectional
 <h3>Step 2 — Setting Up The Virtual Machine</h3>
 Lets setup our virtual machine:
 
-* In this step we connect to the ubuntu virtual machine using VirtualBox.  
-This allows us to access the server environment where the osTicket system and its required components will be installed and configured.
+After installing VirtualBox and downloading Ubuntu, we create and configure a new virtual machine.
+This virtual machine provides an isolated environment where we can safely install and configure the server software required for the osTicket system.
+
+Once the VM is created, Ubuntu is installed and we can begin configuring the server environment.
 
 <details><summary>See screenshots</summary>
 <img src="images/oracle virtualbox.png" width="60%" >
@@ -68,20 +75,27 @@ This allows us to access the server environment where the osTicket system and it
 </details> 
 
 <h3>Step 3 — Setting Up osTicket in your ubuntu vm</h3>
-Login & Update | After Ubuntu Is Installed
+
+After logging into the Ubuntu virtual machine, the system packages are updated to ensure all installed software is current and secure.
+
+Updating the system helps prevent compatibility issues before installing additional services required for the help-desk platform.
 
 ```
 sudo apt update && sudo apt upgrade -y
 ```
 
 <h3>Step 4 — Install LAMP Stack</h3>
-osTicket needs:
 
-Apache
+The osTicket application requires a web server, database server, and PHP runtime environment.
+These components together form a LAMP stack, which consists of:
 
-MySQL / MariaDB
+* Apache (Web Server)
 
-PHP
+* MySQL/MariaDB (Database Server)
+
+* PHP (Server-side scripting language)
+
+First, we install the Apache HTTP Server which will host the osTicket website.
 
 ```
 sudo apt install apache2 -y
@@ -92,35 +106,45 @@ sudo systemctl enable apache2
 sudo systemctl start apache2
 ```
 
+You can verify Apache is running by visiting:
+
 ```
 http://localhost
 ```
 
 <h3>Step 5 — Install MariaDB</h3>
 
+Next, we install MariaDB, which will store all osTicket data such as users, tickets, and system configurations.
+
 ```
 sudo apt install mariadb-server -y
 ```
 
-Secure it:
+After installation, the database server is secured using the built-in security script.
 
 ```
 sudo mysql_secure_installation
 ```
 
-Say:
+During this setup we:
 
-Remove anonymous users → Yes
+* Remove anonymous users
 
-Disallow root remote login → Yes
+* Disable remote root login
 
-Remove test DB → Yes
+* Remove the test database
+
+* These steps improve the security of the database server.
 
 <h3>Step 6 Install PHP</h3>
+
+Since osTicket is written in PHP, we must install PHP along with several required extensions that allow the application to function properly.
 
 ```
 sudo apt install php php-mysql php-imap php-apcu php-intl php-gd php-mbstring php-xml php-cli php-curl unzip -y
 ```
+
+After installation, we restart the Apache service to ensure PHP is loaded correctly.
 
 ```
 sudo systemctl restart apache2
@@ -128,12 +152,14 @@ sudo systemctl restart apache2
 
 <h3>Step 7 — Database Setup</h3>
 
-Login:
+In this step, we create a database that osTicket will use to store its data.
+
+First, log into the MariaDB database server:
 ```
 sudo mysql -u root -p
 ```
 
-Create DB:
+Then create the database and a dedicated user for osTicket:
 ```
 CREATE DATABASE osticket;
 CREATE USER 'osticketuser'@'localhost' IDENTIFIED BY 'StrongPassword';
@@ -141,31 +167,39 @@ GRANT ALL PRIVILEGES ON osticket.* TO 'osticketuser'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
+This ensures osTicket has permission to read and write data to the database.
+
 <h3>Step 8 — Install osTicket</h3>
 
-Download latest:
+Now we download and install osTicket.
+Download the latest release:
 ```
 cd /tmp
 wget https://github.com/osTicket/osTicket/releases/download/v1.18.1/osTicket-v1.18.1.zip
 unzip osTicket-v1.18.1.zip
 ```
 
-Move to web root:
+Move the files to the Apache web directory:
 ```
 sudo mv upload /var/www/html/osticket
 ```
 
-Set permissions:
+Set the correct file permissions so the web server can access the application:
 ```
 sudo chown -R www-data:www-data /var/www/html/osticket
 sudo chmod -R 755 /var/www/html/osticket
 ```
 <h3>Step 9 - Configure Apache</h3>
 
-Create config:
+In this step we configure the Apache HTTP Server so it can properly serve the osTicket application.
+
+First, we create a new Apache virtual host configuration file that defines where the osTicket application is located and how Apache should handle requests to it.
 ```
 sudo nano /etc/apache2/sites-available/osticket.conf
 ```
+
+Inside this configuration file we define the document root, server settings, and directory permissions so Apache can access the osTicket installation.
+
 ```
 <VirtualHost *:80>
     ServerAdmin admin@localhost
@@ -183,45 +217,36 @@ sudo nano /etc/apache2/sites-available/osticket.conf
 </VirtualHost>
 ```
 
-Enable:
+Next, we enable the new site configuration and activate the Apache rewrite module, which allows osTicket to properly handle URLs and routing.
 ```
 sudo a2ensite osticket.conf
 sudo a2enmod rewrite
 sudo systemctl restart apache2
 ```
-Final File Permission:
+Finally, we prepare the osTicket configuration file by copying the sample configuration file and adjusting its permissions so the web installer can write the necessary settings during installation.
 ```
 sudo cp /var/www/html/osticket/include/ost-sampleconfig.php /var/www/html/osticket/include/ost-config.php
 sudo chmod 666 /var/www/html/osticket/include/ost-config.php
 ```
+This completes the Apache configuration and prepares the system for the osTicket web installer.
+
 <h3>Step 10 — Web Installer</h3>
 
-Open browser in Ubuntu VM:
+The final step is to complete the osTicket installation through the web interface.
+
+Open a browser in the Ubuntu VM and navigate to:
 ```
 http://localhost/osticket/setup
 ```
-Fill:
+Fill in the required information including the help desk name, administrator email, and database credentials created earlier.
 
-Field	Value
-Helpdesk Name	Your Company
-Email	admin@email.com
+Once the installation is complete, secure the configuration file and remove the setup directory:
 
-DB Name	osticket
-DB User	osticketuser
-DB Pass	StrongPassword
-
-Click Install Now
-
-After Install (IMPORTANT):
-
-Lock config:
 ```
 sudo chmod 644 /var/www/html/osticket/include/ost-config.php
-```
-Delete setup folder:
-```
 sudo rm -rf /var/www/html/osticket/setup/
 ```
+At this point, the osTicket help desk system is fully installed and ready to manage support tickets.
 
 ## 🎫 Ticket Workflow Demonstration
 
