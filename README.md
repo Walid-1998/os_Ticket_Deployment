@@ -41,7 +41,7 @@ Settings > General > Advanced > Set Both Options To Bidirectional
 <img src="images/copy paste vm 3.jpg" width="60%" >
 </details>
 
-<h3>Step 1 — Downloading Ubuntu Operating System & Oracle VirtualBox</h3>
+<h3> 1. Downloading Ubuntu Operating System & Oracle VirtualBox</h3>
 
 In this step, we download the required software to create our virtual environment.
 We install Oracle VM VirtualBox, which allows us to run virtual machines on our computer, and download the Ubuntu operating system that will host the help-desk system.
@@ -58,7 +58,7 @@ Ubuntu will be used as the server where the osTicket application and its depende
 <img src="images/image of ubuntu download.png" width="60%" >
 </details>
 
-<h3>Step 2 — Setting Up The Virtual Machine</h3>
+<h3> 2. Setting Up The Virtual Machine</h3>
 Lets setup our virtual machine:
 
 After installing VirtualBox and downloading Ubuntu, we create and configure a new virtual machine.
@@ -74,7 +74,7 @@ Once the VM is created, Ubuntu is installed and we can begin configuring the ser
 <img src="images/samenvatting.png" width="60%" >
 </details> 
 
-<h3>Step 3 — Setting Up osTicket in your ubuntu vm</h3>
+<h3> 3. Setting Up osTicket in your ubuntu vm</h3>
 
 After logging into the Ubuntu virtual machine, the system packages are updated to ensure all installed software is current and secure.
 
@@ -84,7 +84,7 @@ Updating the system helps prevent compatibility issues before installing additio
 sudo apt update && sudo apt upgrade -y
 ```
 
-<h3>Step 4 — Install LAMP Stack</h3>
+<h3>4. Install LAMP Stack</h3>
 
 The osTicket application requires a web server, database server, and PHP runtime environment.
 These components together form a LAMP stack, which consists of:
@@ -112,7 +112,7 @@ You can verify Apache is running by visiting:
 http://localhost
 ```
 
-<h3>Step 5 — Install MariaDB</h3>
+<h3> 5. Install MariaDB</h3>
 
 Next, we install MariaDB, which will store all osTicket data such as users, tickets, and system configurations.
 
@@ -136,7 +136,7 @@ During this setup we:
 
 * These steps improve the security of the database server.
 
-<h3>Step 6 Install PHP</h3>
+<h3> 6. Install PHP</h3>
 
 Since osTicket is written in PHP, we must install PHP along with several required extensions that allow the application to function properly.
 
@@ -150,7 +150,7 @@ After installation, we restart the Apache service to ensure PHP is loaded correc
 sudo systemctl restart apache2
 ```
 
-<h3>Step 7 — Database Setup</h3>
+<h3> 7. Database Setup</h3>
 
 In this step, we create a database that osTicket will use to store its data.
 
@@ -169,7 +169,7 @@ EXIT;
 ```
 This ensures osTicket has permission to read and write data to the database.
 
-<h3>Step 8 — Install osTicket</h3>
+<h3> 8. Install osTicket</h3>
 
 Now we download and install osTicket.
 Download the latest release:
@@ -189,7 +189,7 @@ Set the correct file permissions so the web server can access the application:
 sudo chown -R www-data:www-data /var/www/html/osticket
 sudo chmod -R 755 /var/www/html/osticket
 ```
-<h3>Step 9 - Configure Apache</h3>
+<h3> 9. Configure Apache</h3>
 
 In this step we configure the Apache HTTP Server so it can properly serve the osTicket application.
 
@@ -230,7 +230,7 @@ sudo chmod 666 /var/www/html/osticket/include/ost-config.php
 ```
 This completes the Apache configuration and prepares the system for the osTicket web installer.
 
-<h3>Step 10 — Web Installer</h3>
+<h3> 10. Web Installer</h3>
 
 The final step is to complete the osTicket installation through the web interface.
 
