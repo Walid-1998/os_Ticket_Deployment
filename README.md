@@ -66,6 +66,10 @@ This virtual machine provides an isolated environment where we can safely instal
 
 Once the VM is created, Ubuntu is installed and we can begin configuring the server environment.
 
+(ISO image is ubuntu you downloaded before)
+
+
+
 <details><summary>See screenshots</summary>
 <img src="images/oracle virtualbox.png" width="60%" >
 <img src="images/installing the vm.png" width="60%" >
@@ -79,6 +83,12 @@ Once the VM is created, Ubuntu is installed and we can begin configuring the ser
 After logging into the Ubuntu virtual machine, the system packages are updated to ensure all installed software is current and secure.
 
 Updating the system helps prevent compatibility issues before installing additional services required for the help-desk platform.
+
+Show Apps>Terminal
+
+<details><summary>See screenshots</summary>
+<img src="images/terminal.png" width="60%" >
+</details> 
 
 ```
 sudo apt update && sudo apt upgrade -y
