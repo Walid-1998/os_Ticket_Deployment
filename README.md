@@ -32,7 +32,7 @@ The purpose of this project is to simulate a real-world IT support environment w
 Expand the See screenshots section to view the images.
 
 > [!IMPORTANT]
-> Make Sure You Have Enable Copy and Paste in Oracle VirtualBox
+> Make Sure You Have Enabled Copy and Paste in Oracle VirtualBox
 
 Settings > General > Advanced > Set Both Options To Bidirectional 
 <details><summary>See screenshots</summary>
