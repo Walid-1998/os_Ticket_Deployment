@@ -248,7 +248,7 @@ sudo rm -rf /var/www/html/osticket/setup/
 ```
 At this point, the osTicket help desk system is fully installed and ready to manage support tickets.
 
-## 🎫 Ticket Workflow Demonstration
+## Ticket Workflow Demonstration
 
 After installing osTicket, the system was tested by simulating a real support request.
 
