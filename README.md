@@ -13,7 +13,7 @@ The purpose of this project is to simulate a real-world IT support environment w
 <p>
   <img src="https://skillicons.dev/icons?i=ubuntu,mysql,php" />
   <img width="45" alt="osticket icon" src="images/osticket icon.png" />
-  <img width="45" alt="virtualbox icon" src="images/virtualbox.png" />
+  <img width="45" alt="virtualbox icon" src="images/virtualbox icon.png" />
 </p>
 
 - Oracle VirtualBox (Virtual Machines)
