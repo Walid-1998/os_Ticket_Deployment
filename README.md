@@ -104,20 +104,32 @@ First, we install the Apache HTTP Server which will host the osTicket website.
 How To Access The Terminal:
 Show All Apps > Terminal (See Image Below)
 <details><summary>See screenshots</summary>
-<img src="images/terminal.png" width="60%" >
+<img src="images/arrow-image.png" width="60%" >
 </details> 
+
+This command installs the Apache2 web server.
+sudo gives administrator rights, apt install downloads and installs the package from Ubuntu’s repositories, and -y automatically confirms all prompts.
+Apache is the web server that will host osTicket and serve its pages to the browser. Without it, the application cannot be accessed via a web browser.
 
 ```
 sudo apt install apache2 -y
 ```
+
+These two commands manage the Apache web server service.
+systemctl enable apache2 makes Apache start automatically every time the Ubuntu VM boots.
+systemctl start apache2 starts the Apache service immediately.
+Together, they ensure the web server is running now and will start on its own after any reboot. Without these commands, Apache would not run automatically.
 
 ```
 sudo systemctl enable apache2
 sudo systemctl start apache2
 ```
 
-You can verify Apache is running by visiting:
+After starting Apache, I opened Firefox inside the Ubuntu VM and typed http://localhost in the address bar.
+localhost is a special hostname that refers to the local machine (equivalent to IP address 127.0.0.1).
+This step tests whether Apache is correctly installed and running by loading the default welcome page. If the page appears, it confirms the web server is working and ready to host osTicket.
 
+You can verify Apache is running by visiting:
 ```
 http://localhost
 ```
@@ -126,12 +138,19 @@ http://localhost
 
 Next, we install MariaDB, which will store all osTicket data such as users, tickets, and system configurations.
 
+This command installs the MariaDB database server.
+sudo gives administrator rights, apt install downloads the package from Ubuntu’s repositories, and -y automatically confirms all prompts.
+MariaDB is the database engine where osTicket will store all tickets, users, settings, and attachments. Without it, osTicket has no place to save its data.
+
 ```
 sudo apt install mariadb-server -y
 ```
 
 After installation, the database server is secured using the built-in security script.
 
+This command runs an interactive security script for MariaDB.
+It removes anonymous users, disables remote root login, deletes the test database, and reloads privilege tables.
+I answered Y to all questions to harden the database. This step is important because a fresh MariaDB installation has insecure default settings that could be exploited.
 ```
 sudo mysql_secure_installation
 ```
@@ -150,12 +169,16 @@ During this setup we:
 
 Since osTicket is written in PHP, we must install PHP along with several required extensions that allow the application to function properly.
 
+This command installs PHP 8.x and all the required extensions for osTicket.
+sudo gives admin rights, apt install downloads the packages, and -y auto-confirms prompts.
+These extensions provide essential features: database connection (php-mysql), email handling (php-imap), image processing (php-gd), multilingual support (php-intl), and more. Without them, many osTicket features would not work.
 ```
 sudo apt install php php-mysql php-imap php-apcu php-intl php-gd php-mbstring php-xml php-cli php-curl unzip -y
 ```
 
-After installation, we restart the Apache service to ensure PHP is loaded correctly.
-
+This command restarts the Apache web server.
+systemctl restart stops the service and starts it again immediately.
+This is necessary after installing PHP and its extensions so Apache can load the new PHP modules. Without restarting, the newly installed PHP features would not work.
 ```
 sudo systemctl restart apache2
 ```
@@ -164,12 +187,17 @@ sudo systemctl restart apache2
 
 In this step, we create a database that osTicket will use to store its data.
 
-First, log into the MariaDB database server:
+This command logs into the MariaDB database server as the root user.
+sudo runs the command with administrator rights, -u root specifies the username, and -p prompts for the password.
+This step is necessary to access the MariaDB shell so I can create the database and user for osTicket.
 ```
 sudo mysql -u root -p
 ```
 
-Then create the database and a dedicated user for osTicket:
+These commands create a dedicated database and user for osTicket.
+CREATE DATABASE makes the empty database.
+CREATE USER and GRANT set up a secure user with proper permissions only on the osticket database.
+FLUSH PRIVILEGES applies the changes immediately.
 ```
 CREATE DATABASE osticket;
 CREATE USER 'osticketuser'@'localhost' IDENTIFIED BY 'StrongPassword';
@@ -183,6 +211,9 @@ This ensures osTicket has permission to read and write data to the database.
 
 Now we download and install osTicket.
 Download the latest release:
+cd /tmp changes the current directory to the temporary folder (a safe place to download files).
+wget downloads the official osTicket zip file from GitHub.
+unzip extracts the downloaded file, creating an upload folder containing osTicket.
 ```
 cd /tmp
 wget https://github.com/osTicket/osTicket/releases/download/v1.18.1/osTicket-v1.18.1.zip
@@ -190,11 +221,16 @@ unzip osTicket-v1.18.1.zip
 ```
 
 Move the files to the Apache web directory:
+This command moves the extracted upload folder to Apache’s web root directory and renames it to osticket.
+sudo gives administrator rights, mv moves and renames the folder in one step.
+This places the osTicket application files where Apache can serve them to the browser. Without this step, the application would not be accessible via the web.
 ```
 sudo mv upload /var/www/html/osticket
 ```
 
-Set the correct file permissions so the web server can access the application:
+chown -R changes the owner of all files and folders to www-data (the user Apache runs as).
+chmod -R 755 sets read and execute permissions for everyone, but write permission only for the owner.
+These commands are critical so Apache can read and serve the osTicket files. Without correct permissions, you will get "403 Forbidden" errors.
 ```
 sudo chown -R www-data:www-data /var/www/html/osticket
 sudo chmod -R 755 /var/www/html/osticket
@@ -204,12 +240,16 @@ sudo chmod -R 755 /var/www/html/osticket
 In this step we configure the Apache HTTP Server so it can properly serve the osTicket application.
 
 First, we create a new Apache virtual host configuration file that defines where the osTicket application is located and how Apache should handle requests to it.
+
+This command opens the nano text editor with administrator privileges (sudo) to create a new configuration file in Apache’s sites-available directory.
+The file /etc/apache2/sites-available/osticket.conf is where we define a custom "virtual host" for osTicket.
 ```
 sudo nano /etc/apache2/sites-available/osticket.conf
 ```
 
 Inside this configuration file we define the document root, server settings, and directory permissions so Apache can access the osTicket installation.
-
+Without this file, Apache would not know how to properly serve the osTicket application, and accessing it through the browser would likely fail or show incorrect behavior.
+After opening the file with nano, I pasted the following configuration, saved it (Ctrl + O → Enter), and exited (Ctrl + X):
 ```
 <VirtualHost *:80>
     ServerAdmin admin@localhost
@@ -227,13 +267,14 @@ Inside this configuration file we define the document root, server settings, and
 </VirtualHost>
 ```
 
-Next, we enable the new site configuration and activate the Apache rewrite module, which allows osTicket to properly handle URLs and routing.
+After creating and editing the virtual host file, I enabled the new site and the required Apache module with the following commands:
 ```
 sudo a2ensite osticket.conf
 sudo a2enmod rewrite
 sudo systemctl restart apache2
 ```
-Finally, we prepare the osTicket configuration file by copying the sample configuration file and adjusting its permissions so the web installer can write the necessary settings during installation.
+These three commands complete the Apache configuration. They make sure Apache knows about osTicket, supports its URL structure, and applies all the changes we made.
+After running these commands, I also prepared the osTicket configuration file so the web installer could write the database settings:
 ```
 sudo cp /var/www/html/osticket/include/ost-sampleconfig.php /var/www/html/osticket/include/ost-config.php
 sudo chmod 666 /var/www/html/osticket/include/ost-config.php
@@ -244,10 +285,14 @@ This completes the Apache configuration and prepares the system for the osTicket
 
 The final step is to complete the osTicket installation through the web interface.
 
-Open a browser in the Ubuntu VM and navigate to:
+After configuring Apache, I opened Firefox inside the Ubuntu VM and navigated to the following URL:
+http://localhost/osticket/setup
 ```
 http://localhost/osticket/setup
 ```
+This URL launches osTicket’s official installation wizard in the browser. The wizard collects information such as the helpdesk name, administrator account details, and database credentials, then creates all the necessary tables in the MariaDB database and writes the configuration file.
+If everything was configured correctly in the previous steps (Apache, PHP, database, file permissions, and virtual host), the setup page should load successfully. If it shows an error, it usually indicates a problem with permissions, database connection, or Apache configuration.
+
 Fill in the required information including the help desk name, administrator email, and database credentials created earlier.
 
 Once the installation is complete, secure the configuration file and remove the setup directory:
