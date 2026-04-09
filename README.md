@@ -84,12 +84,6 @@ After logging into the Ubuntu virtual machine, the system packages are updated t
 
 Updating the system helps prevent compatibility issues before installing additional services required for the help-desk platform.
 
-Show Apps>Terminal
-
-<details><summary>See screenshots</summary>
-<img src="images/terminal.png" width="60%" >
-</details> 
-
 ```
 sudo apt update && sudo apt upgrade -y
 ```
@@ -106,6 +100,12 @@ These components together form a LAMP stack, which consists of:
 * PHP (Server-side scripting language)
 
 First, we install the Apache HTTP Server which will host the osTicket website.
+
+How To Access The Terminal:
+Show All Apps > Terminal (See Image Below)
+<details><summary>See screenshots</summary>
+<img src="images/terminal.png" width="60%" >
+</details> 
 
 ```
 sudo apt install apache2 -y
