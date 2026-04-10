@@ -49,12 +49,12 @@ This step prepares the foundation — without a virtual machine and OS, I cannot
 
 [Oracle VirtualBox](https://www.virtualbox.org)
 <details><summary>See screenshots</summary>
-<img src="images/image of vm download.png" width="60%" >
+<img src="images/arrow-image (1).png" width="60%" >
 </details>
 
 [Ubuntu](https://ubuntu.com/download/desktop)
 <details><summary>See screenshots</summary>
-<img src="images/image of ubuntu download.png" width="60%" >
+<img src="images/arrow-image (2).png" width="60%" >
 </details>
 
 <h3> 2. Setting Up The Virtual Machine</h3>
