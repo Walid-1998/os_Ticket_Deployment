@@ -43,10 +43,9 @@ Settings > General > Advanced > Set Both Options To Bidirectional
 
 <h3> 1. Downloading Ubuntu Operating System & Oracle VirtualBox</h3>
 
-In this step, we download the required software to create our virtual environment.
-We install Oracle VM VirtualBox, which allows us to run virtual machines on our computer, and download the Ubuntu operating system that will host the help-desk system.
-
-Ubuntu will be used as the server where the osTicket application and its dependencies will be installed.
+I started by downloading Oracle VM VirtualBox (the virtualization software) and the Ubuntu Desktop ISO file.
+VirtualBox allows me to create an isolated virtual machine (VM) on my computer. Ubuntu is used as the operating system because it is stable, free, and widely used for server deployments.
+This step prepares the foundation — without a virtual machine and OS, I cannot install any server software.
 
 [Oracle VirtualBox](https://www.virtualbox.org)
 <details><summary>See screenshots</summary>
@@ -59,16 +58,9 @@ Ubuntu will be used as the server where the osTicket application and its depende
 </details>
 
 <h3> 2. Setting Up The Virtual Machine</h3>
-Lets setup our virtual machine:
-
-After installing VirtualBox and downloading Ubuntu, we create and configure a new virtual machine.
-This virtual machine provides an isolated environment where we can safely install and configure the server software required for the osTicket system.
-
-Once the VM is created, Ubuntu is installed and we can begin configuring the server environment.
-
-(ISO image is ubuntu you downloaded before)
-
-
+I created a new virtual machine in VirtualBox, allocated CPU, RAM (at least 2–4 GB recommended), and hard disk space. Then I attached the Ubuntu ISO and installed Ubuntu inside the VM.
+After installation, I logged into the Ubuntu desktop.
+This gives me a clean, dedicated environment to install and configure osTicket without affecting my main computer.
 
 <details><summary>See screenshots</summary>
 <img src="images/oracle virtualbox.png" width="60%" >
@@ -80,24 +72,26 @@ Once the VM is created, Ubuntu is installed and we can begin configuring the ser
 
 <h3> 3. Setting Up osTicket in your ubuntu vm</h3>
 
-After logging into the Ubuntu virtual machine, the system packages are updated to ensure all installed software is current and secure.
-
-Updating the system helps prevent compatibility issues before installing additional services required for the help-desk platform.
-
+Once inside the Ubuntu VM, I ran the following command to update the system:
 ```
 sudo apt update && sudo apt upgrade -y
 ```
+This command refreshes the package list and installs the latest updates and security patches.
+Why? A fully updated system reduces errors and security risks during the installation of Apache, MariaDB, PHP, and osTicket.
 
 <h3>4. Install LAMP Stack</h3>
 
-The osTicket application requires a web server, database server, and PHP runtime environment.
-These components together form a LAMP stack, which consists of:
+I installed the Apache web server, which is the first part of the LAMP stack:
+```
+sudo apt install apache2 -y
+sudo systemctl enable apache2
+sudo systemctl start apache2
+```
+```apt install apache2 -y``` installs the Apache web server.<br/>
+```enable makes Apache start``` automatically on boot.<br/>
+```start``` launches it immediately.<br/>
 
-* Apache (Web Server)
-
-* MySQL/MariaDB (Database Server)
-
-* PHP (Server-side scripting language)
+I verified it by opening Firefox inside the VM and visiting http://localhost. The default Apache welcome page appeared, confirming the web server was working.
 
 First, we install the Apache HTTP Server which will host the osTicket website.
 
@@ -136,7 +130,7 @@ http://localhost
 
 <h3> 5. Install MariaDB</h3>
 
-Next, we install MariaDB, which will store all osTicket data such as users, tickets, and system configurations.
+Next, i installed MariaDB, which will store all osTicket data such as users, tickets, and system configurations.
 
 This command installs the MariaDB database server.
 sudo gives administrator rights, apt install downloads the package from Ubuntu’s repositories, and -y automatically confirms all prompts.
@@ -167,7 +161,7 @@ During this setup we:
 
 <h3> 6. Install PHP</h3>
 
-Since osTicket is written in PHP, we must install PHP along with several required extensions that allow the application to function properly.
+osTicket is built using PHP, so I installed PHP and the necessary extensions:
 
 This command installs PHP 8.x and all the required extensions for osTicket.
 sudo gives admin rights, apt install downloads the packages, and -y auto-confirms prompts.
@@ -190,11 +184,13 @@ In this step, we create a database that osTicket will use to store its data.
 This command logs into the MariaDB database server as the root user.
 sudo runs the command with administrator rights, -u root specifies the username, and -p prompts for the password.
 This step is necessary to access the MariaDB shell so I can create the database and user for osTicket.
+I logged into MariaDB:
 ```
 sudo mysql -u root -p
 ```
 
 These commands create a dedicated database and user for osTicket.
+Then I created a dedicated database and user for osTicket:
 CREATE DATABASE makes the empty database.
 CREATE USER and GRANT set up a secure user with proper permissions only on the osticket database.
 FLUSH PRIVILEGES applies the changes immediately.
@@ -205,12 +201,12 @@ GRANT ALL PRIVILEGES ON osticket.* TO 'osticketuser'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
-This ensures osTicket has permission to read and write data to the database.
+This creates a separate database called osticket and a user with limited permissions (better for security than using the root user).
 
 <h3> 8. Install osTicket</h3>
 
 Now we download and install osTicket.
-Download the latest release:
+I downloaded the official osTicket files:
 cd /tmp changes the current directory to the temporary folder (a safe place to download files).
 wget downloads the official osTicket zip file from GitHub.
 unzip extracts the downloaded file, creating an upload folder containing osTicket.
@@ -231,10 +227,13 @@ sudo mv upload /var/www/html/osticket
 chown -R changes the owner of all files and folders to www-data (the user Apache runs as).
 chmod -R 755 sets read and execute permissions for everyone, but write permission only for the owner.
 These commands are critical so Apache can read and serve the osTicket files. Without correct permissions, you will get "403 Forbidden" errors.
+Then I set proper ownership and permissions:
 ```
 sudo chown -R www-data:www-data /var/www/html/osticket
 sudo chmod -R 755 /var/www/html/osticket
 ```
+This places the osTicket files in Apache’s web directory and gives the web server the right permissions to access them.
+
 <h3> 9. Configure Apache</h3>
 
 In this step we configure the Apache HTTP Server so it can properly serve the osTicket application.
@@ -275,6 +274,7 @@ sudo systemctl restart apache2
 ```
 These three commands complete the Apache configuration. They make sure Apache knows about osTicket, supports its URL structure, and applies all the changes we made.
 After running these commands, I also prepared the osTicket configuration file so the web installer could write the database settings:
+
 ```
 sudo cp /var/www/html/osticket/include/ost-sampleconfig.php /var/www/html/osticket/include/ost-config.php
 sudo chmod 666 /var/www/html/osticket/include/ost-config.php
