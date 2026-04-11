@@ -31,11 +31,11 @@ The purpose of this project is to simulate a real-world IT support environment w
 > Each step includes written instructions followed by a screenshot.
 Expand the See screenshots section to view the images.
 
-> [!IMPORTANT]
+> [!TIP]
 > Make Sure You Have Enabled Copy and Paste in Oracle VirtualBox
 
 Settings > General > Advanced > Set Both Options To Bidirectional 
-<details><summary>See screenshots</summary>
+<details><summary>Copy and Paste in Oracle VirtualBox Steps</summary>
 <img src="images/copy paste vm 1.jpg" width="60%" >
 <img src="images/copy paste vm 2.jpg" width="60%" >
 <img src="images/copy paste vm 3.jpg" width="60%" >
@@ -82,7 +82,7 @@ Show All Apps > Terminal (See Image Below)
 You should open your terminal first before we will be entering commands to install osTicket on our machine.
 Then, I ran the following command to update the system:
 
-<details><summary>See screenshots</summary>
+<details><summary>Ubuntu OS Login Screen</summary>
 <img src="images/idle.png" width="60%" >
 </details> 
 
@@ -109,8 +109,6 @@ I verified it by opening Firefox inside the VM and visiting http://localhost. (S
 <details><summary>See LocalHost Screenshots</summary>
 <img src="images/localhost.png" width="60%" >
 </details> 
-
-First, we install the Apache HTTP Server which will host the osTicket website.
 
 Apache is the web server that will host osTicket and serve its pages to the browser. Without it, the application cannot be accessed via a web browser.
 
@@ -193,7 +191,12 @@ In this step, we create a database that osTicket will use to store its data.
 This command logs into the MariaDB database server as the root user.
 sudo runs the command with administrator rights, -u root specifies the username, and -p prompts for the password.
 This step is necessary to access the MariaDB shell so I can create the database and user for osTicket.
-I logged into MariaDB:
+I logged into MariaDB (should look like the image after entering the command:
+
+<details><summary>See DataBase In The Terminal</summary>
+<img src="images/db.png" width="60%" >
+</details> 
+
 ```
 sudo mysql -u root -p
 ```
