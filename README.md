@@ -307,6 +307,11 @@ If everything was configured correctly in the previous steps (Apache, PHP, datab
 
 Fill in the required information including the help desk name, administrator email, and database credentials created earlier.
 
+<details><summary>OS Ticket Setup</summary>
+<img src="images/os ticket install 2.png" width="60%" >
+<img src="images/os ticket install 3.png" width="60%" >
+</details> 
+
 Once the installation is complete, secure the configuration file and remove the setup directory:
 
 ```
