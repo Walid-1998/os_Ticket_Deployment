@@ -68,9 +68,24 @@ I created a new virtual machine in VirtualBox, allocated CPU, RAM (at least 2–
 <img src="images/samenvatting.png" width="60%" >
 </details> 
 
+<h3> 2.5 Opening Your Terminal</h3>
+
+How To Access The Terminal:
+Show All Apps > Terminal (See Image Below)
+<details><summary>Terminal Screenshot</summary>
+<img src="images/arrow-image.png" width="60%" >
+</details> 
+
 <h3> 3. Setting Up osTicket in your ubuntu vm</h3>
 
-Once inside the Ubuntu VM, I ran the following command to update the system:
+* Once inside the Ubuntu VM, you should see after starting up the VM for the first time that you need to put your username and password to log into the Ubuntu OS. After logging in, you will see your Ubuntu desktop, which should look like the image below.
+You should open your terminal first before we will be entering commands to install osTicket on our machine.
+Then, I ran the following command to update the system:
+
+<details><summary>See screenshots</summary>
+<img src="images/idle.png" width="60%" >
+</details> 
+
 ```
 sudo apt update && sudo apt upgrade -y
 ```
@@ -86,21 +101,13 @@ sudo systemctl enable apache2
 sudo systemctl start apache2
 ```
 ```apt install apache2 -y``` installs the Apache web server.<br/>
-```enable makes Apache start``` automatically on boot.<br/>
+```enable``` makes Apache start automatically on boot.<br/>
 ```start``` launches it immediately.<br/>
 
 I verified it by opening Firefox inside the VM and visiting http://localhost. The default Apache welcome page appeared, confirming the web server was working.
 
 First, we install the Apache HTTP Server which will host the osTicket website.
 
-How To Access The Terminal:
-Show All Apps > Terminal (See Image Below)
-<details><summary>See screenshots</summary>
-<img src="images/arrow-image.png" width="60%" >
-</details> 
-
-This command installs the Apache2 web server.
-sudo gives administrator rights, apt install downloads and installs the package from Ubuntu’s repositories, and -y automatically confirms all prompts.
 Apache is the web server that will host osTicket and serve its pages to the browser. Without it, the application cannot be accessed via a web browser.
 
 ```
