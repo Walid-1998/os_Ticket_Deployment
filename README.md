@@ -104,7 +104,11 @@ sudo systemctl start apache2
 ```enable``` makes Apache start automatically on boot.<br/>
 ```start``` launches it immediately.<br/>
 
-I verified it by opening Firefox inside the VM and visiting http://localhost. The default Apache welcome page appeared, confirming the web server was working.
+I verified it by opening Firefox inside the VM and visiting http://localhost. (See Image) The default Apache welcome page appeared, confirming the web server was working.
+
+<details><summary>See LocalHost Screenshots</summary>
+<img src="images/localhost.png" width="60%" >
+</details> 
 
 First, we install the Apache HTTP Server which will host the osTicket website.
 
