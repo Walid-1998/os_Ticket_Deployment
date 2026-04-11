@@ -58,12 +58,10 @@ This step prepares the foundation — without a virtual machine and OS, I cannot
 </details>
 
 <h3> 2. Setting Up The Virtual Machine</h3>
-I created a new virtual machine in VirtualBox, allocated CPU, RAM (at least 2–4 GB recommended), and hard disk space. Then I attached the Ubuntu ISO and installed Ubuntu inside the VM.
-After installation, I logged into the Ubuntu desktop.
-This gives me a clean, dedicated environment to install and configure osTicket without affecting my main computer.
+I created a new virtual machine in VirtualBox, allocated CPU, RAM (at least 2–4 GB recommended), and hard disk space. Then I attached the Ubuntu ISO and installed Ubuntu inside the VM. After installation, I entered a user name and password to use in the Ubuntu OS to log in. This gives me a clean, dedicated environment to install and configure osTicket without affecting my main computer.
 
 <details><summary>See screenshots</summary>
-<img src="images/oracle virtualbox.png" width="60%" >
+<img src="images/arrow-image (3).png" width="60%" >
 <img src="images/installing the vm.png" width="60%" >
 <img src="images/os install.png" width="60%" >
 <img src="images/vm hardware.png" width="60%" >
