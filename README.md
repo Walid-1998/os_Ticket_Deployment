@@ -241,6 +241,13 @@ First, we create a new Apache virtual host configuration file that defines where
 
 This command opens the nano text editor with administrator privileges (sudo) to create a new configuration file in Apache’s sites-available directory.
 The file /etc/apache2/sites-available/osticket.conf is where we define a custom "virtual host" for osTicket.
+
+<details><summary>Config Example In Terminal</summary>
+<img src="images/config 1.png" width="60%" >
+<img src="images/config 2.png" width="60%" >
+<img src="images/config 3.png" width="60%" >
+</details> 
+
 ```
 sudo nano /etc/apache2/sites-available/osticket.conf
 ```
