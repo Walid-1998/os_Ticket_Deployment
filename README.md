@@ -29,7 +29,7 @@ The purpose of this project is to simulate a real-world IT support environment w
 
 > [!IMPORTANT]
 > Each step includes written instructions followed by a screenshot.
-Expand the See screenshots section to view the images.
+Expand section to view the images.
 
 > [!TIP]
 > Make Sure You Have Enabled Copy and Paste in Oracle VirtualBox
