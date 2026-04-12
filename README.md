@@ -45,7 +45,7 @@ Settings > General > Advanced > Set Both Options To Bidirectional
 
 I started by downloading Oracle VM VirtualBox (the virtualization software) and the Ubuntu Desktop ISO file.
 VirtualBox allows me to create an isolated virtual machine (VM) on my computer. Ubuntu is used as the operating system because it is stable, free, and widely used for server deployments.
-This step prepares the foundation — without a virtual machine and OS, I cannot install any server software.
+This step prepares the foundation, without a virtual machine and OS, I cannot install any server software.
 
 [Oracle VirtualBox](https://www.virtualbox.org)
 <details><summary>See screenshots</summary>
@@ -58,7 +58,8 @@ This step prepares the foundation — without a virtual machine and OS, I cannot
 </details>
 
 <h3> 2. Setting Up The Virtual Machine</h3>
-I created a new virtual machine in VirtualBox, allocated CPU, RAM (at least 2–4 GB recommended), and hard disk space. Then I attached the Ubuntu ISO and installed Ubuntu inside the VM. After installation, I entered a user name and password to use in the Ubuntu OS to log in. This gives me a clean, dedicated environment to install and configure osTicket without affecting my main computer.
+I created a new virtual machine in VirtualBox, allocated CPU, RAM (at least 8-9 GB recommended), and hard disk space (30GB recommended). Then I attached the Ubuntu ISO and installed Ubuntu inside the VM. After installation, I entered a user name and password to use in the Ubuntu OS to log in. This gives me a clean, dedicated environment to install and configure osTicket without affecting my main computer.
+
 
 <details><summary>See screenshots</summary>
 <img src="images/arrow-image (3).png" width="60%" >
@@ -78,7 +79,7 @@ Show All Apps > Terminal (See Image Below)
 
 <h3> 3. Setting Up osTicket in your ubuntu vm</h3>
 
-* Once inside the Ubuntu VM, you should see after starting up the VM for the first time that you need to put your username and password to log into the Ubuntu OS. After logging in, you will see your Ubuntu desktop, which should look like the image below.
+Once inside the Ubuntu VM, you should see, after starting up the VM for the first time, that you need to put your username and password to log into the Ubuntu OS. After logging in, you will see your Ubuntu desktop, which should look like the image below.
 You should open your terminal first before we will be entering commands to install osTicket on our machine.
 Then, I ran the following command to update the system:
 
@@ -106,25 +107,11 @@ sudo systemctl start apache2
 
 I verified it by opening Firefox inside the VM and visiting http://localhost. (See Image) The default Apache welcome page appeared, confirming the web server was working.
 
-<details><summary>See LocalHost Screenshots</summary>
+<details><summary>See LocalHost Screenshot</summary>
 <img src="images/localhost.png" width="60%" >
-</details> 
+</details>
 
 Apache is the web server that will host osTicket and serve its pages to the browser. Without it, the application cannot be accessed via a web browser.
-
-```
-sudo apt install apache2 -y
-```
-
-These two commands manage the Apache web server service.
-systemctl enable apache2 makes Apache start automatically every time the Ubuntu VM boots.
-systemctl start apache2 starts the Apache service immediately.
-Together, they ensure the web server is running now and will start on its own after any reboot. Without these commands, Apache would not run automatically.
-
-```
-sudo systemctl enable apache2
-sudo systemctl start apache2
-```
 
 After starting Apache, I opened Firefox inside the Ubuntu VM and typed http://localhost in the address bar.
 localhost is a special hostname that refers to the local machine (equivalent to IP address 127.0.0.1).
